@@ -1,0 +1,178 @@
+{
+  "name": "Kubernetes",
+  "style": "visual",
+  "queries": [
+    {
+      "dataset": "kubernetes-metrics",
+      "query": {
+        "breakdowns": [
+          "k8s.node.name"
+        ],
+        "calculations": [
+          {
+            "column": "metrics.cpu.usage",
+            "op": "AVG"
+          },
+          {
+            "column": "metrics.memory.usage",
+            "op": "AVG"
+          }
+        ],
+        "filters": [
+          {
+            "column": "k8s.resource.type",
+            "op": "=",
+            "value": "node",
+            "join_column": ""
+          }
+        ],
+        "orders": [
+          {
+            "column": "metrics.cpu.usage",
+            "op": "AVG",
+            "order": "descending"
+          }
+        ],
+        "time_range": 7200
+      },
+      "query_style": "graph"
+    },
+    {
+      "dataset": "kubernetes-metrics",
+      "query": {
+        "breakdowns": [
+          "k8s.pod.name"
+        ],
+        "calculations": [
+          {
+            "column": "metrics.cpu.usage",
+            "op": "AVG"
+          },
+          {
+            "column": "metrics.memory.usage",
+            "op": "AVG"
+          }
+        ],
+        "filters": [
+          {
+            "column": "k8s.resource.type",
+            "op": "=",
+            "value": "pod",
+            "join_column": ""
+          }
+        ],
+        "orders": [
+          {
+            "column": "metrics.cpu.usage",
+            "op": "AVG",
+            "order": "descending"
+          }
+        ],
+        "limit": 100,
+        "time_range": 7200
+      },
+      "query_style": "graph"
+    },
+    {
+      "dataset": "kubernetes-metrics",
+      "query": {
+        "breakdowns": [
+          "k8s.node.name"
+        ],
+        "calculations": [
+          {
+            "column": "metrics.network.bytes.send",
+            "op": "AVG"
+          },
+          {
+            "column": "metrics.network.bytes.receive",
+            "op": "AVG"
+          }
+        ],
+        "filters": [
+          {
+            "column": "k8s.resource.type",
+            "op": "=",
+            "value": "node",
+            "join_column": ""
+          }
+        ],
+        "orders": [
+          {
+            "column": "metrics.network.bytes.send",
+            "op": "AVG",
+            "order": "descending"
+          }
+        ],
+        "time_range": 7200
+      },
+      "query_style": "graph"
+    },
+    {
+      "dataset": "kubernetes-metrics",
+      "query": {
+        "breakdowns": [
+          "k8s.namespace.name"
+        ],
+        "calculations": [
+          {
+            "column": "metrics.cpu.usage",
+            "op": "AVG"
+          },
+          {
+            "column": "metrics.memory.usage",
+            "op": "AVG"
+          }
+        ],
+        "filters": [
+          {
+            "column": "k8s.resource.type",
+            "op": "=",
+            "value": "pod",
+            "join_column": ""
+          }
+        ],
+        "orders": [
+          {
+            "column": "metrics.cpu.usage",
+            "op": "AVG",
+            "order": "descending"
+          }
+        ],
+        "time_range": 7200
+      },
+      "query_style": "graph"
+    },
+    {
+      "dataset": "kubernetes-metrics",
+      "query": {
+        "breakdowns": [
+          "k8s.pod.name"
+        ],
+        "calculations": [
+          {
+            "column": "status.restart_delta",
+            "op": "SUM"
+          }
+        ],
+        "filters": [
+          {
+            "column": "k8s.resource.type",
+            "op": "=",
+            "value": "pod",
+            "join_column": ""
+          }
+        ],
+        "orders": [
+          {
+            "column": "status.restart_delta",
+            "op": "SUM",
+            "order": "descending"
+          }
+        ],
+        "time_range": 7200
+      },
+      "query_style": "graph"
+    }
+  ]
+}
