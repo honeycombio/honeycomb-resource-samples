@@ -12,9 +12,12 @@ TODO: Add instructions here
 
 Honeycomb's [Derived Columns API](https://docs.honeycomb.io/api/derived-columns/) can be used to create new Derived Columns.
 You will need your Honeycomb API Key, which you can get from Honeycomb Team Settings.
-In the command below, replace `YOUR_API_KEY`, and `path/to/dc.json` with your Honeycomb API Key, and the path to the Derived Column you want to deploy.
+In the command below:
+- replace `$DATASET` with the Honeycomb Dataset to add the Derived Column to
+- replace `YOUR_API_KEY` with your Honeycomb API Key
+- replace `path/to/dc.json` with the path to the Derived Column you want to deploy
 ```shell
-curl https://api.honeycomb.io/1/derived_columns \ 
+curl https://api.honeycomb.io/1/derived_columns/$DATASET \ 
     -X POST \
     -H "X-Honeycomb-Team: YOUR_API_KEY" \
     -d @path/to/dc.json

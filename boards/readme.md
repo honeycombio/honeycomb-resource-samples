@@ -12,7 +12,9 @@ TODO: Add instructions here
 
 Honeycomb's [Boards API](https://docs.honeycomb.io/api/boards-api/) can be used to create new Boards.
 You will need your Honeycomb API Key, which you can get from Honeycomb Team Settings.
-In the command below, replace `YOUR_API_KEY`, and `path/to/board.json` with your Honeycomb API Key, and the path to the Board you want to deploy.
+In the command below:
+- replace `YOUR_API_KEY` with your Honeycomb API Key
+- replace `path/to/board.json` with the path to the Board you want to deploy
 ```shell
 curl https://api.honeycomb.io/1/boards \ 
     -X POST \
