@@ -1,0 +1,50 @@
+
+replicaCount: 1
+
+config:
+  LoggingLevel: info
+  HoneycombAPI: "http://secure-tenancy"
+
+  # Implementation Choices
+  Logger: honeycomb
+  Metrics: honeycomb
+
+  HoneycombLogger:
+    LoggerHoneycombAPI: https://api.honeycomb.io
+    LoggerAPIKey: SetKeyHere        
+    LoggerDataset: refinery-logs
+
+  HoneycombMetrics:
+    MetricsHoneycombAPI: https://api.honeycomb.io
+    MetricsAPIKey: SetKeyHere
+    MetricsDataset: refinery-metrics
+    MetricsReportingInterval: 3
+
+# Values used to build rules.yaml
+rules:
+  #  DryRun: false
+  Sampler : "RulesBasedSampler"
+  rule:
+    - name : "drop example"
+      drop : true
+      condition:
+        - field : "name"
+          operator : "="
+          value : "/vets.html"
+          
+  petclinic-otlphttp:
+    Sampler: EMADynamicSampler
+    GoalSampleRate: 20
+    FieldList:
+      - name
+      - http.status_code
+      - response.status_code
+    UseTraceLength: true
+    AddSampleRateKeyToTrace: true
+    AddSampleRateKeyToTraceField: meta.refinery.dynsampler_key
+    AdjustmentInterval: 15
+    Weight: 0.5
+    MaxKeys: 0
+    AgeOutValue: 0.5
+    BurstMultiple: 2.0
+    BurstDetectionDelay: 3
