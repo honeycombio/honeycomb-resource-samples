@@ -1,0 +1,9 @@
+INT(
+	FORMAT_TIME(
+		"%H",
+		SUB(
+			EVENT_TIMESTAMP(),
+			28800
+		)
+	)
+)
