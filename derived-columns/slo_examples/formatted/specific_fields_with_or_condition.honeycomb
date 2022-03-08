@@ -1,0 +1,27 @@
+IF(
+	AND(
+		EXISTS(
+			$costs
+		),
+		EXISTS(
+			$endpoint
+		),
+		EQUALS(
+			$endpoint,
+			"/accounts/balance/get"
+		)
+	),
+	AND(
+		NOT(
+			EXISTS(
+				$plaidError
+			)
+		),
+		LTE(
+			INT(
+				$costs
+			),
+			12000
+		)
+	)
+)

@@ -1,0 +1,9 @@
+IF(
+	NOT(
+		EXISTS(
+			$trace.parent_id
+		)
+	),
+	true,
+	false
+)
