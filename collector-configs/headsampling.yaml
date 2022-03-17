@@ -9,7 +9,7 @@ processors:
   probabilistic_sampler:
     hash_seed: 42
     # sampling_percentage is 1/$HONEYCOMB_SAMPLE_RATE * 100
-    sampling_percentage: $PROBABALISTIC_SAMPLE_RATE
+    sampling_percentage: $PROBABILISTIC_SAMPLE_RATE
 
   attributes/sample-rate:
     # Note: this will not properly take into account an existing Sample Rate (e.g. in-application sampler)
