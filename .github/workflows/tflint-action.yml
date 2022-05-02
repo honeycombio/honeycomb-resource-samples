@@ -9,11 +9,8 @@ on:
 
 jobs:
   tflint:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v3
         name: Checkout source code
