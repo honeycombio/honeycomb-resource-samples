@@ -30,6 +30,6 @@ jobs:
       - name: Show version
         working-directory: ./terraform
         run: |
-        tflint --version
-        tflint --init
-        tflint -f compact
+        tflint --version \
+        && tflint --init \
+        && tflint -f compact
