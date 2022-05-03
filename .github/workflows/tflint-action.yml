@@ -17,20 +17,19 @@ jobs:
 
       - uses: actions/cache@v3
         name: Cache plugin dir
+        working-directory: ./terraform
         with:
           path: ~/.tflint.d/plugins
           key: ubuntu-latest-tflint-${{ hashFiles('.tflint.hcl') }}
-
+          
       - uses: terraform-linters/setup-tflint@v1
         name: Setup TFLint
         with:
-          tflint_version: v0.29.0
+          tflint_version: v0.35.0
 
       - name: Show version
-        run: tflint --version
-
-      - name: Init TFLint
-        run: tflint --init
-
-      - name: Run TFLint
-        run: tflint -f compact
+        working-directory: ./terraform
+        run: |
+        tflint --version
+        tflint --init
+        tflint -f compact
