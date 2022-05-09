@@ -12,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout source code
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
-      - uses: actions/cache@v3
-        name: Cache plugin dir
+      - name: Cache plugin dir
+        uses: actions/cache@v3
         with:
           path: ~/.tflint.d/plugins
           key: ubuntu-latest-tflint-${{ hashFiles('./terraform/.tflint.hcl') }}
           
-      - uses: terraform-linters/setup-tflint@v1
-        name: Setup TFLint
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v1
         with:
           tflint_version: v0.35.0
 
@@ -33,11 +33,15 @@ jobs:
           tflint --init
           tflint -f compact
 
-      - uses: dflook/terraform-fmt@v1.24.0
-        name: Setup terraform-fmt
-      
-      - name: Run terraform fmt
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+     
+      - name: Terraform Format
+        id: fmt
         working-directory: ./terraform
-        run:  |
-          terraform fmt
+        run: terraform fmt -check
+
+      - name: Wrong formatting found
+        if: ${{ failure() && steps.fmt.outputs.failure-reason == 'check-failed' }}
+        run: echo "Terraform formatting check failed"
       
