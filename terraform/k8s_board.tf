@@ -16,6 +16,7 @@ data "honeycombio_query_specification" "k8s-metrics-query" {
   }
 
   breakdowns = ["k8s.node.name"]
+
   order {
     column = "metrics.cpu.usage"
     op     = "AVG"
