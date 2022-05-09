@@ -32,3 +32,12 @@ jobs:
           tflint --version
           tflint --init
           tflint -f compact
+
+      - uses: dflook/terraform-fmt@v1.24.0
+        name: Setup terraform-fmt
+      
+      - name: Run terraform fmt
+        working-directory: ./terraform
+        run:  |
+          terraform fmt
+      

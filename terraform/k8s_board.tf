@@ -12,17 +12,15 @@ data "honeycombio_query_specification" "k8s-metrics-query" {
   filter {
     column = "k8s.resource.type"
     op     = "="
-    value = "node"
+    value  = "node"
   }
 
   breakdowns = ["k8s.node.name"]
-  orders     = [
-    {
-      column = "metrics.cpu.usage"
-      op     = "AVG"
-      order  = "descending"
-      },
-    ]
+  order {
+    column = "metrics.cpu.usage"
+    op     = "AVG"
+    order  = "descending"
+  }
 }
 
 
@@ -32,7 +30,7 @@ resource "honeycombio_query" "query" {
 }
 
 resource "honeycombio_board" "board" {
-  name        = "k8s-metrics"
+  name = "k8s-metrics"
 
   query {
     dataset  = var.dataset
