@@ -1,40 +1,77 @@
-data "honeycombio_query_specification" "k8s-metrics-query" {
-  calculation {
-    op     = "AVG"
-    column = "metrics.cpu.usage"
-  }
-
-  calculation {
-    op     = "AVG"
-    column = "metrics.memory.usage"
-  }
-
-  filter {
-    column = "k8s.resource.type"
-    op     = "="
-    value  = "node"
-  }
-
-  breakdowns = ["k8s.node.name"]
-
-  order {
-    column = "metrics.cpu.usage"
-    op     = "AVG"
-    order  = "descending"
-  }
+module "query" {
+  source = "./queries"
 }
 
-
-resource "honeycombio_query" "query" {
-  dataset    = var.dataset
-  query_json = data.honeycombio_query_specification.k8s-metrics-query.json
+# Query specification outputs
+resource "honeycombio_query" "k8s-namespace-cpu-and-memory-query" {
+  dataset    = var.metrics_dataset
+  query_json = module.query.k8s-namespace-cpu-and-memory-query-json
 }
 
-resource "honeycombio_board" "board" {
-  name = "k8s-metrics"
+resource "honeycombio_query_annotation" "k8s-namespace-cpu-and-memory-query" {
+  dataset  = var.metrics_dataset
+  query_id = honeycombio_query.k8s-namespace-cpu-and-memory-query.id
+  name     = "k8s namespace cpu and memory usage"
+}
+resource "honeycombio_query" "k8s-node-cpu-and-memory-query" {
+  dataset    = var.metrics_dataset
+  query_json = module.query.k8s-node-cpu-and-memory-query-json
+}
+
+resource "honeycombio_query_annotation" "k8s-node-cpu-and-memory-query" {
+  dataset  = var.metrics_dataset
+  query_id = honeycombio_query.k8s-node-cpu-and-memory-query.id
+  name     = "k8s node cpu and memory usage"
+}
+
+resource "honeycombio_query" "k8s-node-network-traffic-query" {
+  dataset    = var.metrics_dataset
+  query_json = module.query.k8s-node-network-traffic-query-json
+}
+
+resource "honeycombio_query_annotation" "k8s-node-network-traffic-query" {
+  dataset  = var.metrics_dataset
+  query_id = honeycombio_query.k8s-node-network-traffic-query.id
+  name     = "k8s node network traffic"
+}
+
+resource "honeycombio_query" "k8s-pod-restarts-query" {
+  dataset    = var.metrics_dataset
+  query_json = module.query.k8s-pod-restarts-query-json
+}
+
+resource "honeycombio_query_annotation" "k8s-pod-restarts-query" {
+  dataset  = var.metrics_dataset
+  query_id = honeycombio_query.k8s-pod-restarts-query.id
+  name     = "k8s pod restarts"
+}
+
+# Board definition
+resource "honeycombio_board" "k8s-metrics" {
+  name  = "K8s metrics"
+  style = "visual"
+  query {
+    dataset             = var.metrics_dataset
+    query_id            = honeycombio_query.k8s-namespace-cpu-and-memory-query.id
+    query_annotation_id = honeycombio_query_annotation.k8s-namespace-cpu-and-memory-query.id
+
+  }
 
   query {
-    dataset  = var.dataset
-    query_id = honeycombio_query.query.id
+    dataset             = var.metrics_dataset
+    query_id            = honeycombio_query.k8s-node-cpu-and-memory-query.id
+    query_annotation_id = honeycombio_query_annotation.k8s-node-cpu-and-memory-query.id
+  }
+
+  query {
+    dataset             = var.metrics_dataset
+    query_id            = honeycombio_query.k8s-node-network-traffic-query.id
+    query_annotation_id = honeycombio_query_annotation.k8s-node-network-traffic-query.id
+  }
+
+  query {
+    dataset             = var.metrics_dataset
+    query_id            = honeycombio_query.k8s-pod-restarts-query.id
+    query_annotation_id = honeycombio_query_annotation.k8s-pod-restarts-query.id
   }
 }
