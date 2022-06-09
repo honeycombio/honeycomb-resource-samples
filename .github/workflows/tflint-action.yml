@@ -29,9 +29,10 @@ jobs:
       - name: Run TFLint
         working-directory: ./terraform
         run: |
+          terraform init
           tflint --version
           tflint --init
-          tflint -f compact
+          tflint --module -f compact
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
