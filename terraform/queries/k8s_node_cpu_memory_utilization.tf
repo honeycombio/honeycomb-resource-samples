@@ -1,4 +1,4 @@
-data "honeycombio_query_specification" "k8s-metrics-query" {
+data "honeycombio_query_specification" "k8s-node-cpu-and-memory" {
   calculation {
     op     = "AVG"
     column = "metrics.cpu.usage"
@@ -24,17 +24,6 @@ data "honeycombio_query_specification" "k8s-metrics-query" {
   }
 }
 
-
-resource "honeycombio_query" "query" {
-  dataset    = var.dataset
-  query_json = data.honeycombio_query_specification.k8s-metrics-query.json
-}
-
-resource "honeycombio_board" "board" {
-  name = "k8s-metrics"
-
-  query {
-    dataset  = var.dataset
-    query_id = honeycombio_query.query.id
-  }
+output "k8s-node-cpu-and-memory-query-json" {
+    value = data.honeycombio_query_specification.k8s-node-cpu-and-memory.json
 }
