@@ -1,7 +1,3 @@
-module "query" {
-  source = "./queries"
-}
-
 # Query specification outputs
 resource "honeycombio_query" "k8s-namespace-cpu-and-memory-query" {
   dataset    = var.metrics_dataset
