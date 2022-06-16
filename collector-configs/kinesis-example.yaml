@@ -42,7 +42,7 @@ processors:
 exporters:
   logging:
     logLevel: debug
-
+  # No longer need to set dataset for trace data unless using Honeycomb Classic
   otlp/traces:
     endpoint: api.honeycomb.io:443
     headers:
