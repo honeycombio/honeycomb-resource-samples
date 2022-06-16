@@ -15,6 +15,6 @@ provider "honeycombio" {
 
 module "query" {
   source = "../queries"
-  traces_dataset = "${var.traces_dataset}"
-  metrics_dataset = "${var.metrics_dataset}"
+  traces_dataset = var.traces_dataset
+  metrics_dataset = var.metrics_dataset
 }
