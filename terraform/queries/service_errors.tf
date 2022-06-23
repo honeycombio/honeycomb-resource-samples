@@ -1,6 +1,6 @@
 data "honeycombio_query_specification" "service-errors" {
   calculation {
-    op     = "COUNT"
+    op = "COUNT"
   }
 
   filter {
@@ -13,5 +13,5 @@ data "honeycombio_query_specification" "service-errors" {
 }
 
 output "service-errors-query-json" {
-    value = data.honeycombio_query_specification.service-errors.json
+  value = data.honeycombio_query_specification.service-errors.json
 }

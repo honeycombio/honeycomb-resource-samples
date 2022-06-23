@@ -40,5 +40,5 @@ data "honeycombio_query_specification" "service-latency" {
 }
 
 output "service-latency-query-json" {
-    value = data.honeycombio_query_specification.service-latency.json
+  value = data.honeycombio_query_specification.service-latency.json
 }

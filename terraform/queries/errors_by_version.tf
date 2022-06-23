@@ -1,6 +1,6 @@
 data "honeycombio_query_specification" "errors-by-version" {
   calculation {
-    op     = "COUNT"
+    op = "COUNT"
   }
 
   calculation {
@@ -18,5 +18,5 @@ data "honeycombio_query_specification" "errors-by-version" {
 }
 
 output "errors-by-version-query-json" {
-    value = data.honeycombio_query_specification.errors-by-version.json
+  value = data.honeycombio_query_specification.errors-by-version.json
 }

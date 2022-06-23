@@ -13,5 +13,5 @@ data "honeycombio_query_specification" "duration-by-version" {
 }
 
 output "duration-by-version-query-json" {
-    value = data.honeycombio_query_specification.duration-by-version.json
+  value = data.honeycombio_query_specification.duration-by-version.json
 }

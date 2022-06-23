@@ -14,7 +14,7 @@ provider "honeycombio" {
 }
 
 module "derived_columns" {
-  source = "../derived_columns"
-  traces_dataset = var.traces_dataset
+  source          = "../derived_columns"
+  traces_dataset  = var.traces_dataset
   metrics_dataset = var.metrics_dataset
 }

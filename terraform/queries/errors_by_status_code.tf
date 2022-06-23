@@ -6,5 +6,5 @@ data "honeycombio_query_specification" "errors-by-status-code" {
 }
 
 output "errors-by-status-code-query-json" {
-    value = data.honeycombio_query_specification.errors-by-status-code.json
+  value = data.honeycombio_query_specification.errors-by-status-code.json
 }

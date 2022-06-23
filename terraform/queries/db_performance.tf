@@ -1,6 +1,6 @@
 data "honeycombio_query_specification" "db-performance" {
   calculation {
-    op     = "COUNT"
+    op = "COUNT"
   }
 
   calculation {
@@ -22,5 +22,5 @@ data "honeycombio_query_specification" "db-performance" {
 }
 
 output "db-performance-query-json" {
-    value = data.honeycombio_query_specification.db-performance.json
+  value = data.honeycombio_query_specification.db-performance.json
 }
