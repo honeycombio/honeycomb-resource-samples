@@ -1,6 +1,14 @@
 ### Prerequisites
 You must have `terraform` installed. Follow [these directions](https://learn.hashicorp.com/tutorials/terraform/install-cli) to install for your platform.
 
+You will need a Honeycomb API key with the adequate permissions to create boards, queries etc.. Once you have the API key, you can set it like so:
+
+```
+export HONEYCOMBIO_APIKEY=<YOUR_API_KEY>
+```
+
+Or define it via the `api_key` variable.
+
 ### Quickstart
 Create a `<your-filename>.tfvars` file with the following variables:
 
