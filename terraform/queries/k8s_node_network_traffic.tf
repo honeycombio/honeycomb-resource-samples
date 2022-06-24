@@ -25,6 +25,6 @@ data "honeycombio_query_specification" "k8s-node-network-traffic" {
 }
 
 output "k8s-node-network-traffic-query-json" {
-    value = data.honeycombio_query_specification.k8s-node-network-traffic.json
+  value = data.honeycombio_query_specification.k8s-node-network-traffic.json
 }
 

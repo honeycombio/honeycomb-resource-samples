@@ -1,6 +1,6 @@
 data "honeycombio_query_specification" "requests-by-endpoint" {
   calculation {
-    op     = "COUNT"
+    op = "COUNT"
   }
 
   calculation {
@@ -16,11 +16,11 @@ data "honeycombio_query_specification" "requests-by-endpoint" {
   breakdowns = ["http.target"]
 
   order {
-    op     = "COUNT"
-    order  = "descending"
+    op    = "COUNT"
+    order = "descending"
   }
 }
 
 output "requests-by-endpoint-query-json" {
-    value = data.honeycombio_query_specification.requests-by-endpoint.json
+  value = data.honeycombio_query_specification.requests-by-endpoint.json
 }

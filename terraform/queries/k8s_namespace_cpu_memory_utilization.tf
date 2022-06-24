@@ -25,5 +25,5 @@ data "honeycombio_query_specification" "k8s-namespace-cpu-and-memory" {
 }
 
 output "k8s-namespace-cpu-and-memory-query-json" {
-    value = data.honeycombio_query_specification.k8s-namespace-cpu-and-memory.json
+  value = data.honeycombio_query_specification.k8s-namespace-cpu-and-memory.json
 }

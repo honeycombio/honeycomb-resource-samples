@@ -20,5 +20,5 @@ data "honeycombio_query_specification" "k8s-pod-restarts" {
 }
 
 output "k8s-pod-restarts-query-json" {
-    value = data.honeycombio_query_specification.k8s-pod-restarts.json
+  value = data.honeycombio_query_specification.k8s-pod-restarts.json
 }
