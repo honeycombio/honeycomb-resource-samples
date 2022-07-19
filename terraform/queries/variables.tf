@@ -19,5 +19,5 @@ variable "kafka_stats_dataset" {
 variable "refinery_metrics_dataset" {
   description = "Dataset to use for refinery metrics"
   type        = string
-  default     = "ExampleRefineryMetricsDataset"
+  default     = "Refinery Metrics"
 }
