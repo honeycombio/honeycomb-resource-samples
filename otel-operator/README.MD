@@ -1,6 +1,6 @@
 # Auto Instrumentation Operator Examples
 
-This deploys a spring petclinic app that sends otel traces to an opentelemetry collector. The collector then sends traces to Honeycomb. The collector and auto instrumenation is setup via the opentelemetry operator.
+This deploys a spring petclinic app that sends otel traces to an opentelemetry collector. The collector then sends traces to Honeycomb. The collector and auto instrumentation is setup via the opentelemetry operator.
 
 ## Install the operator
 
