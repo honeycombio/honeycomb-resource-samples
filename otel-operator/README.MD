@@ -36,7 +36,7 @@ kubectl apply -f .
 Go into utility service folder. Deploy
 
 ```bash
-kubectly apply -f .
+kubectl apply -f .
 ```
 
 ## Test App
