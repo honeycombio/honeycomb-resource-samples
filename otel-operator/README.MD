@@ -33,10 +33,9 @@ kubectl apply -f .
 
 **ONLY DO THIS FOR TESTING**. The utility service should **not** be used in production.
 
-Go into utility service folder. Deploy
-
 ```bash
-kubectl apply -f .
+helm repo add puckpuck https://puckpuck.github.io/helm-charts
+helm install seashell puckpuck/seashell
 ```
 
 ## Test App
