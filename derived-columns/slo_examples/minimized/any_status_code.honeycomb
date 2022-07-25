@@ -1,1 +1,1 @@
-IF(AND(EXISTS($app.status_code),NOT(IN($app.status_code,401,403,404))),LTE($app.status_code,400))
+IF(AND(EXISTS($http.status_code),NOT(IN($http.status_code,401,403,404))),LT($http.status_code,400))
