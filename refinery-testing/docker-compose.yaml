@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  refinery: 
+    image: honeycombio/refinery:latest
+    ports: 
+      - 8080:8080 #http
+      - 9090:9090 #grpc
+      - 8081:8081 #peering
+    volumes: 
+      - ./refinery/:/etc/refinery/
