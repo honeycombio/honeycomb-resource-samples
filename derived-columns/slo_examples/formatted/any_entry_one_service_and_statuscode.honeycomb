@@ -9,7 +9,7 @@ IF(
 			$duration_ms
 		),
 		EXISTS(
-			$app.status_code
+			$http.status_code
 		),
 		EQUALS(
 			$service_name,
@@ -18,7 +18,7 @@ IF(
 	),
 	AND(
 		LT(
-			$app.status_code,
+			$http.status_code,
 			400
 		),
 		LTE(
