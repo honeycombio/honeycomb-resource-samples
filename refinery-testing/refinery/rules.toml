@@ -1,0 +1,11 @@
+# 'dev' is the name of the environment
+[dev]
+	Sampler = "RulesBasedSampler"
+    [[dev.rule]]
+        name = "Keep all errors"
+		SampleRate = 1
+        [[dev.rule.condition]]
+            field = "error"
+            operator = "exists"
+    [[dev.rule]]
+        SampleRate = 2 # default when no rules match

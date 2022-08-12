@@ -26,7 +26,7 @@ Then deploy the app from within the deploy folder.
 
 
 ```bash
-kubectl apply -f .
+kubectl apply -f ./deploy
 ```
 
 ## Install utility service
