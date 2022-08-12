@@ -9,7 +9,7 @@ spec:
       valueFrom:                                                                                                                                                                    
         secretKeyRef:                                                                                                                                                               
           key: api-key                                                                                                                                                              
-          name: honeycomb 
+          name: honeycomb
   config: |
     receivers:
       otlp:
@@ -25,7 +25,6 @@ spec:
         endpoint: "api.honeycomb.io:443"
         headers:
           "x-honeycomb-team": "${HONEYCOMB_API_KEY}"
-          "x-honeycomb-dataset": "petclinic"
     service:
       pipelines:
         traces:
