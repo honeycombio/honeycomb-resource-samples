@@ -1,0 +1,21 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: auto-instrumentation-to-collector
+  namespace: petclinic
+spec:
+  java:
+    env:
+      - name: OTEL_INSTRUMENTATION_METHODS_INCLUDE
+        value: org.springframework.samples.petclinic.service.ClinicServiceImpl[findPetTypes,findOwnerById,findOwnerByLastName,findPetById]
+      - name: OTEL_INSTRUMENTATION_HTTP_CAPTURE_HEADERS_SERVER_REQUEST
+        value: accept-encoding,accept-language
+      - name: OTEL_INSTRUMENTATION_SERVLET_EXPERIMENTAL_CAPTURE_REQUEST_PARAMETERS
+        value: lastName
+  exporter:
+    endpoint: http://opentelemetry-collector:4317
+  propagators:
+    - tracecontext
+    - baggage
+  resource:
+    addK8sUIDAttributes: true
