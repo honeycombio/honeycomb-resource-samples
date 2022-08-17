@@ -4,7 +4,7 @@ metadata:
   name: petclinic
   namespace: petclinic
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: petclinic
   ports:
