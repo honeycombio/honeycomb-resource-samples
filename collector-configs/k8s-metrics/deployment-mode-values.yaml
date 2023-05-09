@@ -1,0 +1,64 @@
+mode: deployment
+replicaCount: 1
+
+presets:
+  clusterMetrics:
+    enabled: true
+  kubernetesEvents:
+    enabled: true
+
+extraEnvs:
+  - name: HONEYCOMB_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: honeycomb
+        key: api-key
+
+config:
+  exporters:
+    otlp/honeycomb-k8scluster:
+      endpoint: api.honeycomb.io:443
+      headers:
+        "x-honeycomb-team": ${HONEYCOMB_API_KEY}
+        "x-honeycomb-dataset": kubernetes-k8scluster
+    otlp/honeycomb-k8sobjects:
+      endpoint: api.honeycomb.io:443
+      headers:
+        "x-honeycomb-team": ${HONEYCOMB_API_KEY}
+        "x-honeycomb-dataset": kubernetes-k8sobjects
+
+  receivers:
+    k8s_cluster:
+      node_conditions_to_report:
+        - Ready
+        - DiskPressure
+        - MemoryPressure
+        - PIDPressure
+        - NetworkUnavailable
+      allocatable_types_to_report:
+        - cpu
+        - memory
+        - ephemeral-storage
+        - storage
+
+  processors:
+    transform/k8sobjects:
+      log_statements:
+        - context: log
+          statements:
+            - 'merge_maps(attributes["body"], ParseJSON(body), "upsert")'
+
+  service:
+    pipelines:
+      metrics:
+        exporters:
+          - logging
+          - otlp/honeycomb-k8scluster
+      logs:
+        processors:
+          - memory_limiter
+          - transform/k8sobjects
+          - batch
+        exporters:
+          - logging
+          - otlp/honeycomb-k8sobjects

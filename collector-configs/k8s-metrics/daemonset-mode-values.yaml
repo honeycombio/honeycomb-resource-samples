@@ -1,0 +1,59 @@
+mode: daemonset
+
+presets:
+  kubeletMetrics:
+    enabled: true
+
+extraEnvs:
+  - name: HONEYCOMB_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: honeycomb
+        key: api-key
+
+config:
+  exporters:
+    otlp/honeycomb-kubeletstats:
+      endpoint: api.honeycomb.io:443
+      headers:
+        "x-honeycomb-team": ${HONEYCOMB_API_KEY}
+        "x-honeycomb-dataset": kubernetes-kubeletstats
+
+  processors:
+    metricstransform:
+      transforms:
+        - include: k8s.node.network.errors
+          action: update
+          operations:
+            - action: aggregate_labels
+              label_set: []
+              aggregation_type: sum
+        - include: k8s.node.network.io
+          action: update
+          operations:
+            - action: aggregate_labels
+              label_set: []
+              aggregation_type: sum
+        - include: k8s.pod.network.errors
+          action: update
+          operations:
+            - action: aggregate_labels
+              label_set: []
+              aggregation_type: sum
+        - include: k8s.pod.network.io
+          action: update
+          operations:
+            - action: aggregate_labels
+              label_set: []
+              aggregation_type: sum
+
+  service:
+    pipelines:
+      metrics:
+        processors:
+          - memory_limiter
+          - metricstransform
+          - batch
+        exporters:
+          - logging
+          - otlp/honeycomb-kubeletstats
