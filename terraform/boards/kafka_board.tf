@@ -7,7 +7,7 @@ resource "honeycombio_query" "kafka-broker-cpu-util-query" {
 resource "honeycombio_query_annotation" "kafka-broker-cpu-util-query" {
   dataset  = var.kafka_stats_dataset
   query_id = honeycombio_query.kafka-broker-cpu-util-query.id
-  name     = "k8s namespace cpu and memory usage"
+  name     = "CPU utilization per broker"
 }
 resource "honeycombio_query" "kafka-disk-free-query" {
   dataset    = var.kafka_stats_dataset
@@ -17,7 +17,7 @@ resource "honeycombio_query" "kafka-disk-free-query" {
 resource "honeycombio_query_annotation" "kafka-disk-free-query" {
   dataset  = var.kafka_stats_dataset
   query_id = honeycombio_query.kafka-disk-free-query.id
-  name     = "k8s node cpu and memory usage"
+  name     = "Min disk free by hostname/instance type"
 }
 
 resource "honeycombio_query" "kafka-heap-use-and-gc-query" {
@@ -28,7 +28,7 @@ resource "honeycombio_query" "kafka-heap-use-and-gc-query" {
 resource "honeycombio_query_annotation" "kafka-heap-use-and-gc-query" {
   dataset  = var.kafka_stats_dataset
   query_id = honeycombio_query.kafka-heap-use-and-gc-query.id
-  name     = "k8s node network traffic"
+  name     = "Kafka heap usage and GC"
 }
 
 resource "honeycombio_query" "kafka-network-throughput-query" {
@@ -39,7 +39,7 @@ resource "honeycombio_query" "kafka-network-throughput-query" {
 resource "honeycombio_query_annotation" "kafka-network-throughput-query" {
   dataset  = var.kafka_stats_dataset
   query_id = honeycombio_query.kafka-network-throughput-query.id
-  name     = "k8s pod restarts"
+  name     = "Broker network throughput"
 }
 
 resource "honeycombio_query" "kafka-throughput-query" {
@@ -50,7 +50,7 @@ resource "honeycombio_query" "kafka-throughput-query" {
 resource "honeycombio_query_annotation" "kafka-throughput-query" {
   dataset  = var.kafka_stats_dataset
   query_id = honeycombio_query.kafka-throughput-query.id
-  name     = "k8s pod restarts"
+  name     = "Kafka messages per sec"
 }
 
 resource "honeycombio_query" "kafka-underreplication-stats-query" {
@@ -61,7 +61,7 @@ resource "honeycombio_query" "kafka-underreplication-stats-query" {
 resource "honeycombio_query_annotation" "kafka-underreplication-stats-query" {
   dataset  = var.kafka_stats_dataset
   query_id = honeycombio_query.kafka-underreplication-stats-query.id
-  name     = "k8s pod restarts"
+  name     = "Kafka underreplication recovery"
 }
 
 # Board definition
